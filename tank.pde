@@ -9,6 +9,12 @@ It has been stripped down and merged into one file.
 
 _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 Anything with 1 is on the side that XBEE1 is, and 2 for XBEE2 side.
+
+the "#define m1forward digitalWrite(M1, HIGH)" is a shortcut for compilers
+it will later replace the lines with the code when it is compiled. Notice
+how it is used in the code below. If you wish to use the other functions 
+you can add them from the original file. 
+https://github.com/androng/DFrover/blob/master/Full_code/Drivers.pde
 _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
 License
@@ -64,22 +70,21 @@ void loop(){
   Serial.print(", ");
   Serial.println(sensor2);
   if(sensor1 > 100){
-    m1forward;
     m2forward;
-    setSpeed(1, 255);
-    setSpeed(2, 0);
-  } else if(sensor2 > 100){
-    m1forward;
-    m2forward;
+    m1back;
     setSpeed(2, 255);
-    setSpeed(1, 0);
+    setSpeed(1, 90);
+  } else if(sensor2 > 100){
+    m2back;
+    m1forward;
+    setSpeed(1, 255);
+    setSpeed(2, 90);
   } else {
     m1forward;
     m2forward;
-    setSpeed(2, 0);
-    setSpeed(1, 0);
+    setSpeed(2, 128);
+    setSpeed(1, 128);
   }
-    
 }
     
 
